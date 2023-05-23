@@ -1,0 +1,17 @@
+.post p{
+  margin: 0;
+}
+
+.item{
+  font-size: 20px;
+}
+
+.btn{
+  border: none;
+  padding: 5;
+  margin: 0;
+  border-radius: 30px;
+  background: none;
+  cursor: pointer;
+  color: #ec6279;
+}

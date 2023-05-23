@@ -1,0 +1,20 @@
+.new{
+  display: flex;
+  flex-direction: column;
+  min-height: 130px;
+  justify-content: space-between;
+}
+
+.text{
+  border: none;
+  min-height: 70px;
+  font-size: 20px;
+}
+
+.btn{
+  padding: 10px 20px;
+  border-radius: 10px;
+  background-color: #b42d2d80;
+  color: #fff;
+  width: 110px;
+}

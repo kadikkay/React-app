@@ -1,0 +1,18 @@
+.img{
+  grid-area: img;
+  width: 100%;
+}
+.block{
+  grid-area: blog;
+  display: flex;
+}
+
+.block ul{
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.image{
+  margin-right: 30px;
+}

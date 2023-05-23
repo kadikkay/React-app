@@ -1,0 +1,11 @@
+.title{
+  color: #b42d2d;
+  font-size: 30px;
+}
+
+.content{
+  display: flex;
+  flex-wrap: wrap;
+  border-radius: 10px;
+}
+

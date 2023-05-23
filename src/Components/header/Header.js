@@ -1,6 +1,6 @@
 import s from "./Header.module.css";
 
-function Header() {
+const Header = () => {
   return (
     <header className={s.header}>
       <img

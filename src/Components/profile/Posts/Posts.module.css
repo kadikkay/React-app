@@ -1,0 +1,9 @@
+.posts{
+  grid-area: post;
+  padding: 0 10px;
+  font-size: 30px;
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+}
+

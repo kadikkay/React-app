@@ -1,18 +1,20 @@
 import React from "react";
+import Post from "../Post/Post";
 import s from "./New.module.css";
 
 const New = (props) => {
-  let newPostElement = React.createRef();
+  let postElem = props.postData.map((post) => (
+    <Post id={post.id} cap={post.cap} key={post.id} like={post.like} descr={post.descr} />
+  ));
 
   let addPost = () => {
     props.addPost();
-    props.newPost('');
   };
 
-  let onPostChange = () => {
-    let text = newPostElement.current.value;
-    props.newPost(text);
-  }
+  let onPostChange = (e) => {
+    let text = e.target.value;
+    props.updateNewPostText(text);
+  };
 
   return (
     <div className={s.new}>
@@ -20,13 +22,13 @@ const New = (props) => {
       <textarea
         placeholder="My text..."
         className={s.text}
-        ref={newPostElement}
         onChange={onPostChange}
-        value={props.base.newPostText}
+        value={props.newPostText}
       />
       <button onClick={addPost} className={s.btn}>
         Publish
       </button>
+      {postElem}
     </div>
   );
 };

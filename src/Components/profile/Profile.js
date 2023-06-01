@@ -3,7 +3,6 @@ import ProfileInfo from "./Posts/Profileinfo/Profileinfo";
 import s from "./Profile.module.css";
 
 const Profile = (props) => {
-
   return (
     <div className={s.content}>
       <img
@@ -12,9 +11,9 @@ const Profile = (props) => {
         alt="#"
       />
       <ProfileInfo />
-      <Posts base={props.state} addPost={props.addPost} newPost={props.newPost}/>
+      <Posts />
     </div>
   );
-}
+};
 
 export default Profile;

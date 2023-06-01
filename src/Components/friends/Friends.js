@@ -2,8 +2,8 @@ import FriendsItem from "./FriendsItem/FriendsItem";
 import s from "./Friends.module.css";
 
 const Friends = (props) => {
-  let friendsElem = props.state.dialogData.map((dialog) => (
-    <FriendsItem img={dialog.img} id={dialog.id} />
+  let friendsElem = props.store.map((dialog) => (
+    <FriendsItem img={dialog.img} key={dialog.id} id={dialog.id} />
   ));
 
   return (

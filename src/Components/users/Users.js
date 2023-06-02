@@ -1,10 +1,11 @@
 import React from "react";
 import UserItem from "./User/UserItem";
 import s from "./Users.module.css";
+import { Route, Routes } from "react-router-dom";
 
 const Users = (props) => {
   let pageCount = Math.ceil(props.totalCount / props.pageSize);
-    pageCount = 20
+  pageCount = 20;
   let pages = [];
   for (let i = 1; i <= pageCount; i++) {
     pages.push(i);

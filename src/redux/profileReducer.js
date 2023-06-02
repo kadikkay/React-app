@@ -20,13 +20,20 @@ const profileReducer = (state = initialState, action) => {
         postData: [newPost, ...state.postData],
         newPostText: "",
       };
-    }
+    };
     case "UPDATE_NEW_POST_TEXT": {
       return { ...state, newPostText: action.newText };
+    };
+    case "SET_PROFILE": {
+      return {
+        ...state,
+        dataProfile: action.dataProfile
+
+      };
     }
     default:
       return state;
-  }
+  };
 };
 
 export const addPostCreator = () => ({ type: "ADD_POST" });
@@ -34,6 +41,10 @@ export const addPostCreator = () => ({ type: "ADD_POST" });
 export const updateNewPostTextCreator = (text) => ({
   type: "UPDATE_NEW_POST_TEXT",
   newText: text,
+});
+export const setProfile = (dataProfile) => ({
+  type: "SET_PROFILE",
+  dataProfile,
 });
 
 export default profileReducer;

@@ -1,0 +1,123 @@
+.block{
+  padding: 50px 30px;
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: 1fr 2fr;
+  grid-gap: 10px;
+  border-radius: 10px;
+}
+
+.block div + div{
+  padding: 0 30px;
+  padding-right: 0;
+}
+
+.dialogs{
+  /* display: grid;
+  grid-template-columns: 1fr; */
+  grid-gap: 10px;
+  padding: 20px 30px;
+  background-color: #fff;
+  border-radius: 10px;
+  outline: 2px solid #ffd70020;
+}
+
+.dialogs li:not(:last-child){
+  margin-bottom: 20px;
+}
+
+.messages{
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  padding: 20px 10px;
+  margin-bottom: 30px;
+  min-height: 556px;
+  max-height: 556px;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+  scroll-padding-bottom: 100%;
+  background-color: #fff;
+  border-radius: 10px;
+  outline: 2px solid #ffd70020;
+}
+
+/* width */
+.messages::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+.messages::-webkit-scrollbar-track {
+    background: #fff;
+    border-radius: 10px;
+}
+
+/* Handle */
+.messages::-webkit-scrollbar-thumb {
+    background:  #e2cfcf;
+    border-radius: 10px;
+}
+
+/* Handle on hover */
+.messages::-webkit-scrollbar-thumb:hover {
+    background: #b42d2d80;
+}
+
+.messages li:not(:last-child){
+  margin-bottom: 20px;
+}
+
+.text{
+  width: 100%;
+  min-height: 60px;
+  font-size: 20px;
+  border: none;
+  padding: 10px 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  color: #b42d2d;
+  outline: 2px solid #ffd70020;
+  resize: none;
+}
+
+.text:hover{
+  background-color: #fff;
+}
+
+.text:focus{
+  background-color: #fff;
+  outline: 2px solid #b42d2d80;
+}
+
+.text:focus + .btn{
+  border: 2px solid #b42d2d80;
+  color: #b42d2d;
+}
+
+.text::-webkit-input-placeholder { /* WebKit browsers */
+  color: #e2cfcf ;
+}
+
+.new{
+  position: relative;
+}
+
+.btn{
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-58%) translateX(-10%);
+  padding: 7px 17px;
+  background-color: #fff;
+  border-radius: 10px;
+  color: #e2cfcf;
+  transition: background-color .2s ease-in-out, color .2s ease-in-out;
+  border: 2px solid #ffd70020;
+}
+
+.btn:hover{
+  background-color: #b42d2d;
+  color: #fff !important;
+  border: 2px solid #b42d2d !important;
+}

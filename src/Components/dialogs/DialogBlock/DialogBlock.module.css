@@ -1,0 +1,41 @@
+.messages{
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  padding: 20px 10px;
+  margin-bottom: 30px;
+  min-height: 556px;
+  max-height: 556px;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+  scroll-padding-bottom: 100%;
+  background-color: #fff;
+  border-radius: 10px;
+  outline: 2px solid #ffd70020;
+}
+
+/* width */
+.messages::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+.messages::-webkit-scrollbar-track {
+    background: #fff;
+    border-radius: 10px;
+}
+
+/* Handle */
+.messages::-webkit-scrollbar-thumb {
+    background:  #e2cfcf;
+    border-radius: 10px;
+}
+
+/* Handle on hover */
+.messages::-webkit-scrollbar-thumb:hover {
+    background: #b42d2d80;
+}
+
+.messages li:not(:last-child){
+  margin-bottom: 20px;
+}

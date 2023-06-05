@@ -6,5 +6,10 @@
   align-items: center;
   padding: 0 10px;
   border-radius: 10px;
+  justify-content: space-between;
+}
+
+.login__block{
+  color: #b42d2d;
 }
 

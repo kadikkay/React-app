@@ -1,8 +1,6 @@
 let initialState = {
-  postData: [
-    { id: 1, cap: "Post one", like: 23, descr: "My first social network" },
-    { id: 2, cap: "Post two", like: 4, descr: "I'm can all!!!" },
-  ],
+  postData: [],
+  dataProfile: null,
   newPostText: "",
 };
 
@@ -20,20 +18,19 @@ const profileReducer = (state = initialState, action) => {
         postData: [newPost, ...state.postData],
         newPostText: "",
       };
-    };
+    }
     case "UPDATE_NEW_POST_TEXT": {
       return { ...state, newPostText: action.newText };
-    };
+    }
     case "SET_PROFILE": {
       return {
         ...state,
-        dataProfile: action.dataProfile
-
+        dataProfile: action.dataProfile,
       };
     }
     default:
       return state;
-  };
+  }
 };
 
 export const addPostCreator = () => ({ type: "ADD_POST" });

@@ -17,7 +17,12 @@ class UsersContainer extends React.Component {
     this.props.fetchingChanged(true);
     axios
       .get(
-        `https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`
+        `https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`, {
+          withCredentials: true,
+          headers: {
+            "API-KEY": "29392b1b-14cc-49b0-8408-912b188af9ae"
+          }
+        }
       )
       .then((response) => {
         this.props.setUsers(response.data.items);
@@ -31,7 +36,12 @@ class UsersContainer extends React.Component {
     this.props.fetchingChanged(true);
     axios
       .get(
-        `https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`
+        `https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`, {
+          withCredentials: true,
+          headers: {
+            "API-KEY": "29392b1b-14cc-49b0-8408-912b188af9ae"
+          }
+        }
       )
       .then((response) => {
         this.props.setUsers(response.data.items);
@@ -56,16 +66,6 @@ class UsersContainer extends React.Component {
             isFetching={this.props.isFetching}
           />
         )}
-        {/* <Users
-          onPageChanged={this.onPageChanged}
-          users={this.props.users}
-          follow={this.props.follow}
-          unfollow={this.props.unfollow}
-          totalCount={this.props.totalCount}
-          pageSize={this.props.pageSize}
-          currentPage={this.props.currentPage}
-          isFetching={this.props.isFetching}
-        /> */}
       </>
     );
   }

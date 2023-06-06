@@ -17,9 +17,9 @@ const UserItem = (props) => {
         </NavLink>
         <div>
           {props.followed ? (
-            <button
+            <button disabled={props.followingIsProgress.some(id => id === props.id)}
               onClick={() => {
-
+                props.followingChanged(true, props.id)
                 axios
                   .delete(
                     `https://social-network.samuraijs.com/api/1.0/follow/${props.id}`,
@@ -34,6 +34,7 @@ const UserItem = (props) => {
                     if (response.data.resultCode === 0) {
                       props.unfollow(props.id);
                     }
+                    props.followingChanged(false, props.id)
                   });    
               }}
               className={s.btn}
@@ -41,8 +42,9 @@ const UserItem = (props) => {
               unFollow
             </button>
           ) : (
-            <button
+            <button disabled={props.followingIsProgress.some(id => id === props.id)}
               onClick={() => {
+                props.followingChanged(true, props.id)
                 axios
                   .post(
                     `https://social-network.samuraijs.com/api/1.0/follow/${props.id}`,
@@ -58,7 +60,7 @@ const UserItem = (props) => {
                     if (response.data.resultCode === 0) {
                       props.follow(props.id);
                     }
-                    debugger
+                    props.followingChanged(false, props.id)
                   });
               }}
               className={s.btn}

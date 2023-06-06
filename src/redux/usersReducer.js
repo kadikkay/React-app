@@ -1,9 +1,12 @@
+import { userAPI } from "../api/api";
+
 let initialState = {
   users: [],
   pageSize: 10,
   totalCount: 0,
   currentPage: 1,
   isFetching: false,
+  followingIsProgress: [],
 };
 
 const usersReducer = (state = initialState, action) => {
@@ -61,6 +64,14 @@ const usersReducer = (state = initialState, action) => {
         isFetching: action.isFetching,
       };
     }
+    case "TOGGLE_IS_PROGRESS": {
+      return {
+        ...state,
+        followingIsProgress: action.isFetching
+          ? [...state.followingIsProgress, action.userId]
+          : state.followingIsProgress.filter((id) => id != action.userId),
+      };
+    }
     default:
       return state;
   }
@@ -83,5 +94,21 @@ export const fetchingChanged = (isFetching) => ({
   type: "TOGGLE_IS_FETCHING",
   isFetching,
 });
+export const followingChanged = (isFetching, userId) => ({
+  type: "TOGGLE_IS_PROGRESS",
+  isFetching,
+  userId,
+});
+
+export const getUsersThunkCreator = (currentPage, pageSize) => {
+  return (dispatch) => {
+    dispatch(fetchingChanged(true));
+    userAPI.getUsers(currentPage, pageSize).then((data) => {
+      dispatch(setUsers(data.items));
+      dispatch(setTotalUsersCount(data.totalCount));
+      dispatch(fetchingChanged(false));
+    });
+  };
+};
 
 export default usersReducer;

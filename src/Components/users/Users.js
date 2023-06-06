@@ -1,7 +1,6 @@
 import React from "react";
 import UserItem from "./User/UserItem";
 import s from "./Users.module.css";
-import { Route, Routes } from "react-router-dom";
 
 const Users = (props) => {
   let pageCount = Math.ceil(props.totalCount / props.pageSize);
@@ -30,6 +29,8 @@ const Users = (props) => {
       <div>
         {props.users.map((user) => (
           <UserItem
+            followingChanged={props.followingChanged}
+            followingIsProgress={props.followingIsProgress}
             fullName={user.name}
             photo={user.photos}
             status={user.status}

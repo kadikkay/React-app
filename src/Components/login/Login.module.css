@@ -1,0 +1,9 @@
+.login__block{
+  text-align: center;
+  width: 100%;
+  padding: 0 10px;
+  border-radius: 10px;
+  justify-content: space-between;
+  color: #b42d2d;
+}
+

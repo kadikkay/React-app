@@ -1,8 +1,10 @@
+import { authAPI } from "../api/api";
+
 let initialState = {
   userId: null,
   login: null,
   email: null,
-  isAuth: false
+  isAuth: false,
 };
 
 const authReducer = (state = initialState, action) => {
@@ -11,7 +13,7 @@ const authReducer = (state = initialState, action) => {
       return {
         ...state,
         ...action.dataUser,
-        isAuth: true
+        isAuth: true,
       };
     }
     default:
@@ -19,13 +21,19 @@ const authReducer = (state = initialState, action) => {
   }
 };
 
-export const addMessageCreator = () => ({ type: "SEND_MESSAGE" });
-
-export const setAuthUserData = (dataUser) => ({ type: "SET_AUTH_USERS_DATA", dataUser });
-
-export const updateNewMessageTextCreator = (text) => ({
-  type: "UPDATE_NEW_MESSAGE_BODY",
-  body: text,
+export const setAuthUserData = (dataUser) => ({
+  type: "SET_AUTH_USERS_DATA",
+  dataUser,
 });
+
+export const getAuth = (data) => {
+  return (dispatch) => {
+    authAPI.getAuth(data).then((data) => {
+      if (data.resultCode === 0) {
+        dispatch(setAuthUserData(data.data));
+      }
+    });
+  };
+};
 
 export default authReducer;

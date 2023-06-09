@@ -5,7 +5,12 @@ import s from "./Dialogs.module.css";
 
 const Dialogs = (props) => {
   let dialogElem = props.dialogData.map((dialog) => (
-    <DialogItem img={dialog.img} name={dialog.name} key={dialog.id} id={dialog.id} />
+    <DialogItem
+      img={dialog.img}
+      name={dialog.name}
+      key={dialog.id}
+      id={dialog.id}
+    />
   ));
 
   let addMessage = () => {
@@ -16,6 +21,7 @@ const Dialogs = (props) => {
     let text = e.target.value;
     props.onMessageChange(text);
   };
+  debugger
   return (
     <div className={s.block}>
       <div className={s.dialogs}>{dialogElem}</div>

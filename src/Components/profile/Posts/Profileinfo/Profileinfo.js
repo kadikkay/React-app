@@ -1,5 +1,6 @@
 import Preloader from "../../../preloader/Preloader";
 import s from "./Profileinfo.module.css";
+import StatusContainer from "./Status/StatusContainer";
 
 const ProfileInfo = (props) => {
 
@@ -20,6 +21,7 @@ const ProfileInfo = (props) => {
       />
       <div>
         <div className={s.title}>{props.dataProfile.fullName}</div>
+        <StatusContainer />
         <ul>
           <li>About me: {props.dataProfile.aboutMe}</li>
           <li>Education: {props.dataProfile.lookingForAJobDescription}</li>

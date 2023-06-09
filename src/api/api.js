@@ -16,11 +16,39 @@ export const userAPI = {
       )
       .then((response) => response.data);
   },
+  follow(userID = 1){
+    return instanse
+    .post(
+      `follow/${userID}`,
+    )
+  },
+  unfollow(userID = 1){
+    return instanse
+    .delete(
+      `follow/${userID}`,
+    )  
+  },
+}
+
+export const profileAPI = {
   getProfile(userId = 2) {
     return instanse
       .get(`profile/` + userId)
       .then((response) => response.data);
   },
+  getStatus(userId = 2) {
+    return instanse
+      .get(`profile/status` + userId)
+      .then((response) => response.data);
+  },
+  updateStatus(status) {
+    return instanse
+      .put(`profile/status`, {status}, {} )
+      .then((response) => response.data);
+  },
+}
+
+export const authAPI = {
   getAuth ()  {
     return instanse
       .get(`auth/me`)

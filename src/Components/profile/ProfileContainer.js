@@ -1,10 +1,11 @@
 import React from "react";
-import { setProfile } from "../../redux/profileReducer";
+import { setProfile, getProfile, getStatus } from "../../redux/profileReducer";
 import s from "./Profile.module.css";
 import Profile from "./Profile";
 import { connect } from "react-redux";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { userAPI } from "../../api/api";
+import { withAuthRedirect } from "../../hoc/withAuthRedirect";
+import { compose } from "redux";
 
 class ProfileContainer extends React.Component {
   componentDidMount() {
@@ -13,19 +14,18 @@ class ProfileContainer extends React.Component {
       userId = 29199;
     }
 
-    userAPI.getProfile(userId).then((data) => {
-      this.props.setProfile(data);
-    });
+    this.props.getProfile(userId);
+    this.props.getStatus(userId)
   }
 
   render() {
     return (
       <div className={s.content}>
-        <img
+        {/* <img
           className={s.img}
           src="https://helpx.adobe.com/content/dam/help/en/photoshop/using/convert-color-image-black-white/jcr_content/main-pars/before_and_after/image-before/Landscape-Color.jpg"
           alt="#"
-        />
+        /> */}
         <Profile {...this.props} dataProfile={this.props.dataProfile} />
       </div>
     );
@@ -48,9 +48,16 @@ function withRouter(ProfileContainer) {
 let mapStateToProps = (state) => {
   return {
     dataProfile: state.profile.dataProfile,
+    status: state.profile.status
   };
 };
 
-export default connect(mapStateToProps, {
-  setProfile,
-})(withRouter(ProfileContainer));
+export default compose(
+  connect(mapStateToProps, {
+    setProfile,
+    getProfile,
+    getStatus,
+  }),
+  withRouter,
+  // withAuthRedirect
+)(ProfileContainer);

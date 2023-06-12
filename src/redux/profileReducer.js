@@ -4,7 +4,7 @@ let initialState = {
   postData: [],
   dataProfile: null,
   newPostText: "",
-  status: "Hi",
+  profileStatus: "",
 };
 
 const profileReducer = (state = initialState, action) => {
@@ -34,7 +34,7 @@ const profileReducer = (state = initialState, action) => {
     case "SET_STATUS": {
       return {
         ...state,
-        status: action.status,
+        profileStatus: action.status,
       };
     }
     default:
@@ -66,7 +66,7 @@ export const getProfile = (userID) => {
 
 export const getStatus = (userID) => {
   return (dispatch) => {
-    profileAPI.updateStatus(userID).then((data) => {
+    profileAPI.getStatus(userID).then((data) => {
       dispatch(setStatus(data));
     });
   };
@@ -74,8 +74,10 @@ export const getStatus = (userID) => {
 
 export const updateStatus = (status) => {
   return (dispatch) => {
-    profileAPI.updateStatus(status).then((data) => {
-      dispatch(setStatus(data));
+    profileAPI.updateStatus(status).then((response) => {
+      if (response.data.resultCode === 0) {
+        dispatch(setStatus(status));
+      }
     });
   };
 };

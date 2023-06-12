@@ -38,13 +38,13 @@ export const profileAPI = {
   },
   getStatus(userId = 2) {
     return instanse
-      .get(`profile/status` + userId)
+      .get(`profile/status/` + userId)
       .then((response) => response.data);
   },
   updateStatus(status) {
     return instanse
-      .put(`profile/status`, {status}, {} )
-      .then((response) => response.data);
+      .put(`profile/status/`, {status}, {} )
+      // .then((response) => response.data);
   },
 }
 

@@ -15,7 +15,6 @@ class ProfileContainer extends React.Component {
     }
 
     this.props.getProfile(userId);
-    this.props.getStatus(userId)
   }
 
   render() {
@@ -26,7 +25,7 @@ class ProfileContainer extends React.Component {
           src="https://helpx.adobe.com/content/dam/help/en/photoshop/using/convert-color-image-black-white/jcr_content/main-pars/before_and_after/image-before/Landscape-Color.jpg"
           alt="#"
         /> */}
-        <Profile {...this.props} dataProfile={this.props.dataProfile} />
+        <Profile {...this.props} dataProfile={this.props.dataProfile} userId={this.props.router.params.userId}/>
       </div>
     );
   }
@@ -59,5 +58,5 @@ export default compose(
     getStatus,
   }),
   withRouter,
-  // withAuthRedirect
+  withAuthRedirect
 )(ProfileContainer);

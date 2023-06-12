@@ -21,7 +21,7 @@ const ProfileInfo = (props) => {
       />
       <div>
         <div className={s.title}>{props.dataProfile.fullName}</div>
-        <StatusContainer />
+        <StatusContainer userId={props.userId}/>
         <ul>
           <li>About me: {props.dataProfile.aboutMe}</li>
           <li>Education: {props.dataProfile.lookingForAJobDescription}</li>

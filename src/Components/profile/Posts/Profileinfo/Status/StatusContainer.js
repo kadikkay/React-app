@@ -8,9 +8,9 @@ import { connect } from "react-redux";
 
 let mapStateToProps = (state) => {
   return {
-    status: state.profile.status,
     profileStatus: state.profile.profileStatus,
     store: state.profile,
+    dataProfile: state.profile.dataProfile,
   };
 };
 

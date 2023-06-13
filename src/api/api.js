@@ -44,7 +44,6 @@ export const profileAPI = {
   updateStatus(status) {
     return instanse
       .put(`profile/status/`, {status}, {} )
-      // .then((response) => response.data);
   },
 }
 
@@ -54,4 +53,9 @@ export const authAPI = {
       .get(`auth/me`)
       .then((response) => response.data);
   },
+  setLoginData (data) {
+    return instanse
+      .post(`auth/login`, {data})
+      .then((response) => response.data)
+  }
 }

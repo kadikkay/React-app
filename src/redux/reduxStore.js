@@ -8,7 +8,7 @@ import dialogsReducer from "./dialogsReducer";
 import usersReducer from "./usersReducer";
 import authReducer from "./authReducer";
 import thunkMiddleware from "redux-thunk";
-import { reducer as formReducer } from 'redux-form'
+import { reducer as formReducer } from "redux-form";
 
 let reducers = combineReducers({
   profile: profileReducer,

@@ -1,0 +1,13 @@
+.text{
+  border: none;
+  min-height: 70px;
+  font-size: 20px;
+  resize: none;
+  width: 100%;
+}
+
+.text.error,
+.input.error{
+  border: 2px solid red;
+  border-radius: 10px;
+} 

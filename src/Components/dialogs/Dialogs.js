@@ -2,6 +2,7 @@ import React from "react";
 import DialogItem from "./DialogItem/DialogItem";
 import DialogBlock from "./DialogBlock/DialogBlock";
 import s from "./Dialogs.module.css";
+import MessageRedaxForm from "./MessageForm/MessageForm";
 
 const Dialogs = (props) => {
   let dialogElem = props.dialogData.map((dialog) => (
@@ -13,30 +14,16 @@ const Dialogs = (props) => {
     />
   ));
 
-  let addMessage = () => {
-    props.addMessage();
-  };
+    let addNewMessage  = (values) => {
+      props.addMessage(values.body)
+    }
 
-  let onMessageChange = (e) => {
-    let text = e.target.value;
-    props.onMessageChange(text);
-  };
   return (
     <div className={s.block}>
       <div className={s.dialogs}>{dialogElem}</div>
       <div>
         <DialogBlock state={props.state} />
-        <div className={s.new}>
-          <textarea
-            className={s.text}
-            placeholder="Enter ur message..."
-            onChange={onMessageChange}
-            value={props.newMessageText}
-          ></textarea>
-          <button className={s.btn} onClick={addMessage}>
-            Swoosh
-          </button>
-        </div>
+        <MessageRedaxForm onSubmit={addNewMessage}/>
       </div>
     </div>
   );

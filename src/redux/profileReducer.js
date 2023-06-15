@@ -3,7 +3,6 @@ import { profileAPI } from "../api/api";
 let initialState = {
   postData: [],
   dataProfile: null,
-  newPostText: "",
   profileStatus: "",
 };
 
@@ -14,16 +13,12 @@ const profileReducer = (state = initialState, action) => {
         id: 3,
         cap: "New post",
         like: 0,
-        descr: state.newPostText,
+        descr: action.post,
       };
       return {
         ...state,
         postData: [newPost, ...state.postData],
-        newPostText: "",
       };
-    }
-    case "UPDATE_NEW_POST_TEXT": {
-      return { ...state, newPostText: action.newText };
     }
     case "SET_PROFILE": {
       return {
@@ -42,12 +37,7 @@ const profileReducer = (state = initialState, action) => {
   }
 };
 
-export const updateNewPostTextCreator = (text) => ({
-  type: "UPDATE_NEW_POST_TEXT",
-  newText: text,
-});
-
-export const addPostCreator = () => ({ type: "ADD_POST" });
+export const addPost = (post) => ({ type: "ADD_POST", post });
 
 export const setProfile = (dataProfile) => ({
   type: "SET_PROFILE",

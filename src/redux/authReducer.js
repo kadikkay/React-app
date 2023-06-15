@@ -47,7 +47,6 @@ export const getAuth = (data) => {
   };
 };
 export const setLogin = (data) => {
-  debugger
   return (dispatch) => {
     authAPI.setLoginData(data).then((data) => {
       // if (data.resultCode === 1) {

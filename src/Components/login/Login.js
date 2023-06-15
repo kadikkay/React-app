@@ -1,10 +1,11 @@
 import { Field, reduxForm } from "redux-form";
 import s from "./Login.module.css";
-import { setLogin } from "../../redux/authReducer";
+import { Input } from "../common/FormsControl/Input";
+import { maxLengthCreator, required } from "../../utils/validators/validators";
 
 const Login = (props) => {
   const onSubmit = (formData) => {
-    setLogin(formData)
+    props.setLogin(formData);
     console.log(formData);
   };
   return (
@@ -20,20 +21,32 @@ const LoginForm = (props) => {
     <form className={s.form} onSubmit={props.handleSubmit}>
       <div>
         <label>Login</label>
-        <Field component="input" name="email" type="text" placeholder="login" />
+        <Field
+          component={Input}
+          name="email"
+          type="text"
+          placeholder="login"
+          validate={[required, maxLengthCreator(5)]}
+        />
       </div>
       <div>
         <label>Password</label>
         <Field
-          component="input"
+          component={Input}
           name="password"
           type="text"
           placeholder="Pass"
+          validate={[required, maxLengthCreator(10)]}
         />
       </div>
       <div>
         <label>Remember me</label>
-        <Field component="input" name="rememberMe" type="checkbox" />
+        <Field
+          component={Input}
+          name="rememberMe"
+          type="checkbox"
+          validate={[required]}
+        />
       </div>
       <button>Log in</button>
     </form>

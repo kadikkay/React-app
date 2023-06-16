@@ -1,11 +1,10 @@
 import { authAPI } from "../api/api";
 
 let initialState = {
-  userId: null,
+  id: null,
   login: null,
   email: null,
   isAuth: false,
-  dataLogin : null,
 };
 
 const authReducer = (state = initialState, action) => {
@@ -13,14 +12,7 @@ const authReducer = (state = initialState, action) => {
     case "SET_AUTH_USERS_DATA": {
       return {
         ...state,
-        ...action.dataUser,
-        isAuth: true,
-      };
-    }
-    case "LOG_IN": {
-      return {
-        ...state,
-        dataLogin: action.data,
+        ...action.payload,
       };
     }
     default:
@@ -28,31 +20,41 @@ const authReducer = (state = initialState, action) => {
   }
 };
 
-export const setAuthUserData = (dataUser) => ({
+export const setAuthUserData = ({ email, id, login, isAuth}) => ({
   type: "SET_AUTH_USERS_DATA",
-  dataUser,
-});
-export const logIn = (data) => ({
-  type: "LOG_IN",
-  data,
+  payload: { email, id, login, isAuth},
 });
 
-export const getAuth = (data) => {
+export const getAuth = (data) => {  
   return (dispatch) => {
     authAPI.getAuth(data).then((data) => {
       if (data.resultCode === 0) {
-        dispatch(setAuthUserData(data.data));
+        let {email, id, login} = data.data;
+        dispatch(setAuthUserData({email, id, login, isAuth: true}));
       }
     });
   };
 };
-export const setLogin = (data) => {
+export const login = (email, password, rememberMe, ) => {
   return (dispatch) => {
-    authAPI.setLoginData(data).then((data) => {
-      // if (data.resultCode === 1) {
-        dispatch(logIn(data));
-      // }
-    });
+    authAPI
+      .setLoginData(email, password, rememberMe)
+      .then((response) => {
+        if (response.data.resultCode === 0) {
+          dispatch(getAuth());
+        }
+      });
+  };
+};
+export const logout = () => {
+  return (dispatch) => {
+    authAPI
+      .setLogOutData()
+      .then((response) => {
+        if (response.data.resultCode === 0) {
+          dispatch(setAuthUserData({email: null, id: null, login: null, isAuth: false}));
+        }
+      });
   };
 };
 

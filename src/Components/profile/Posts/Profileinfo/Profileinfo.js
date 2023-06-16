@@ -1,4 +1,4 @@
-import Preloader from "../../../preloader/Preloader";
+import Preloader from "../../../common/preloader/Preloader";
 import s from "./Profileinfo.module.css";
 import StatusContainer from "./Status/StatusContainer";
 

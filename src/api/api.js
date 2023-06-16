@@ -53,9 +53,12 @@ export const authAPI = {
       .get(`auth/me`)
       .then((response) => response.data);
   },
-  setLoginData (data) {
+  setLoginData (email, password, rememberMe) {
     return instanse
-      .post(`auth/login`, {data})
-      .then((response) => response.data)
+      .post(`auth/login`, {email, password, rememberMe});
+  },
+  setLogOutData () {
+    return instanse
+      .delete(`auth/login`);
   }
 }

@@ -1,7 +1,11 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, Navigate } from "react-router-dom";
 import s from "./Header.module.css";
 
 const Header = (props) => {
+  // if (props.authData.isAuth !== true) {
+  //   return <Navigate to="/login" />
+  // }
+
   return (
     <header className={s.header}>
       <img
@@ -10,7 +14,10 @@ const Header = (props) => {
       />
       <div className={s.login__block}>
         {props.authData.isAuth === true ? (
-          props.authData.login
+          <div>
+            <span>{props.authData.login}</span>
+            <button onClick={props.logout}>Log Out</button>
+          </div>
         ) : (
           <NavLink to={"/login"}>Login</NavLink>
         )}

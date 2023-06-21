@@ -1,34 +1,43 @@
 import React from "react";
-import { setProfile } from "../../redux/profileReducer";
+import {
+  setProfile,
+  getProfile,
+  getStatus,
+  updateStatus,
+} from "../../redux/profileReducer";
 import s from "./Profile.module.css";
 import Profile from "./Profile";
 import { connect } from "react-redux";
-import axios from "axios";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { withAuthRedirect } from "../../hoc/withAuthRedirect";
+import { compose } from "redux";
 
 class ProfileContainer extends React.Component {
   componentDidMount() {
     let userId = this.props.router.params.userId;
     if (!userId) {
-      userId = 29199;
+      userId = this.props.userId;
+      if (!userId) {
+        this.props.history.push("/login");
+      }
     }
-
-    axios
-      .get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId)
-      .then((response) => {
-        this.props.setProfile(response.data);
-      });
+    this.props.getProfile(userId);
+    this.props.getStatus(userId);
   }
 
   render() {
     return (
       <div className={s.content}>
-        <img
+        {/* <img
           className={s.img}
           src="https://helpx.adobe.com/content/dam/help/en/photoshop/using/convert-color-image-black-white/jcr_content/main-pars/before_and_after/image-before/Landscape-Color.jpg"
           alt="#"
+        /> */}
+        <Profile
+          {...this.props}
+          dataProfile={this.props.dataProfile}
+          userId={this.props.router.params.userId}
         />
-        <Profile {...this.props} dataProfile={this.props.dataProfile} />
       </div>
     );
   }
@@ -50,9 +59,18 @@ function withRouter(ProfileContainer) {
 let mapStateToProps = (state) => {
   return {
     dataProfile: state.profile.dataProfile,
+    status: state.profile.status,
+    userId: state.auth.id,
   };
 };
 
-export default connect(mapStateToProps, {
-  setProfile,
-})(withRouter(ProfileContainer));
+export default compose(
+  connect(mapStateToProps, {
+    setProfile,
+    getProfile,
+    getStatus,
+    updateStatus,
+  }),
+  withRouter,
+  withAuthRedirect
+)(ProfileContainer);

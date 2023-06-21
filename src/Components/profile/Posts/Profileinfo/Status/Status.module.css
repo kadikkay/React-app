@@ -1,0 +1,10 @@
+.status{
+    background-color: transparent;
+    border: none;
+    resize: none;
+    cursor: pointer;
+}
+
+.status:focus{
+    background-color: #fff;
+}

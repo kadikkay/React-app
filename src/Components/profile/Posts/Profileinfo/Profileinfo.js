@@ -1,10 +1,10 @@
-import Preloader from "../../../preloader/Preloader";
+import Preloader from "../../../common/preloader/Preloader";
 import s from "./Profileinfo.module.css";
+import StatusWithHooks from "./Status/StatusWithHooks";
 
 const ProfileInfo = (props) => {
-
   if (!props.dataProfile) {
-    return <Preloader />
+    return <Preloader />;
   }
 
   return (
@@ -20,6 +20,10 @@ const ProfileInfo = (props) => {
       />
       <div>
         <div className={s.title}>{props.dataProfile.fullName}</div>
+        <StatusWithHooks
+          updateStatus={props.updateStatus}
+          status={props.status}
+        />
         <ul>
           <li>About me: {props.dataProfile.aboutMe}</li>
           <li>Education: {props.dataProfile.lookingForAJobDescription}</li>

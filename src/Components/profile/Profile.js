@@ -5,7 +5,11 @@ import s from "./Profile.module.css";
 const Profile = (props) => {
   return (
     <div className={s.content}>
-      <ProfileInfo dataProfile={props.dataProfile} />
+      <ProfileInfo
+        dataProfile={props.dataProfile}
+        updateStatus={props.updateStatus}
+        status={props.status}
+      />
       <Posts />
     </div>
   );

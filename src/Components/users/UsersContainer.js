@@ -1,52 +1,31 @@
 import { connect } from "react-redux";
 import {
   fetchingChanged,
+  followingChanged,
+  getUsers,
   follow,
-  setPage,
-  setTotalUsersCount,
-  setUsers,
   unfollow,
 } from "../../redux/usersReducer";
 import React from "react";
-import axios from "axios";
 import Users from "./Users";
-import Preloader from "../preloader/Preloader";
+import Preloader from "../common/preloader/Preloader";
+import { withAuthRedirect } from "../../hoc/withAuthRedirect";
+import { compose } from "redux";
+import { followingIsProgress, getCurrentPage, getPageSize, getTotalCount, getUsersState, isFetching } from "../../redux/usersSelectors";
 
 class UsersContainer extends React.Component {
   componentDidMount() {
-    this.props.fetchingChanged(true);
-    axios
-      .get(
-        `https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`, {
-          withCredentials: true,
-          headers: {
-            "API-KEY": "29392b1b-14cc-49b0-8408-912b188af9ae"
-          }
-        }
-      )
-      .then((response) => {
-        this.props.setUsers(response.data.items);
-        this.props.setTotalUsersCount(response.data.totalCount);
-        this.props.fetchingChanged(false);
-      });
+    this.props.getUsers(this.props.currentPage, this.props.pageSize);
   }
 
   onPageChanged = (page) => {
-    this.props.setPage(page);
-    this.props.fetchingChanged(true);
-    axios
-      .get(
-        `https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`, {
-          withCredentials: true,
-          headers: {
-            "API-KEY": "29392b1b-14cc-49b0-8408-912b188af9ae"
-          }
-        }
-      )
-      .then((response) => {
-        this.props.setUsers(response.data.items);
-        this.props.fetchingChanged(false);
-      });
+    this.props.getUsers(page, this.props.pageSize);
+    // this.props.setPage(page);
+    // this.props.fetchingChanged(true);
+    // getUsers(page, this.props.pageSize).then((data) => {
+    //     this.props.setUsers(data.items);
+    //     this.props.fetchingChanged(false);
+    //   });
   };
 
   render() {
@@ -64,6 +43,8 @@ class UsersContainer extends React.Component {
             pageSize={this.props.pageSize}
             currentPage={this.props.currentPage}
             isFetching={this.props.isFetching}
+            followingChanged={this.props.followingChanged}
+            followingIsProgress={this.props.followingIsProgress}
           />
         )}
       </>
@@ -71,21 +52,37 @@ class UsersContainer extends React.Component {
   }
 }
 
+// let mapStateToProps = (state) => {
+//   return {
+//     users: state.usersPage.users,
+//     pageSize: state.usersPage.pageSize,
+//     totalCount: state.usersPage.totalCount,
+//     currentPage: state.usersPage.currentPage,
+//     isFetching: state.usersPage.isFetching,
+//     followingIsProgress: state.usersPage.followingIsProgress,
+//   };
+// };
+
 let mapStateToProps = (state) => {
   return {
-    users: state.usersPage.users,
-    pageSize: state.usersPage.pageSize,
-    totalCount: state.usersPage.totalCount,
-    currentPage: state.usersPage.currentPage,
-    isFetching: state.usersPage.isFetching,
+    users: getUsersState(state),
+    pageSize: getPageSize(state),
+    totalCount: getTotalCount(state),
+    currentPage: getCurrentPage(state),
+    isFetching: isFetching(state),
+    followingIsProgress: followingIsProgress(state)
   };
 };
 
-export default connect(mapStateToProps, {
-  follow,
-  unfollow,
-  setUsers,
-  setPage,
-  setTotalUsersCount,
-  fetchingChanged,
-})(UsersContainer);
+export default compose(
+  connect(mapStateToProps, {
+    fetchingChanged,
+    followingChanged,
+    getUsers,
+    follow,
+    unfollow,
+  }),
+  withAuthRedirect
+)(UsersContainer);
+
+// [_site_admin_email] <dmonogarov@gmail.com>

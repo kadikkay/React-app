@@ -1,0 +1,33 @@
+.login__block{
+  text-align: center;
+  width: 100%;
+  padding: 0 10px;
+  border-radius: 10px;
+  justify-content: space-between;
+  color: #b42d2d;
+}
+
+.form{
+  display: grid;
+  grid-template-rows: .3fr .3fr .3fr .3fr;
+  text-align: center;
+  grid-gap: 10px;
+}
+
+.form div{
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 10px;
+}
+
+.form div label{
+  text-align: right;
+}
+
+.form div input{
+  text-align: left;
+  width: 50%;
+}
+
+

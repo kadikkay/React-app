@@ -28,7 +28,6 @@ let initialState = {
         img: "https://img.championat.com/s/735x490/news/big/c/g/foto-rajan-gosling-v-obraze-kena-dlya-filma-barbi_16553112791320986632.jpg",
       },
     ],
-    newMessageText: "",
   },
   dialogData: [
     {
@@ -67,22 +66,12 @@ let initialState = {
 const dialogsReducer = (state = initialState, action) => {
   switch (action.type) {
     case "SEND_MESSAGE": {
-      let body = state.messageData.newMessageText;
+      let body = action.body;
       return {
         ...state,
         messageData: {
           ...state.messageData,
-          newMessageText: "",
           messageMe: [...state.messageData.messageMe, { id: 7, text: body }],
-        },
-      };
-    }
-    case "UPDATE_NEW_MESSAGE_BODY": {
-      return {
-        ...state,
-        messageData: {
-          ...state.messageData,
-          newMessageText: action.body,
         },
       };
     }
@@ -91,11 +80,6 @@ const dialogsReducer = (state = initialState, action) => {
   }
 };
 
-export const addMessageCreator = () => ({ type: "SEND_MESSAGE" });
-
-export const updateNewMessageTextCreator = (text) => ({
-  type: "UPDATE_NEW_MESSAGE_BODY",
-  body: text,
-});
+export const addMessage = (body) => ({ type: "SEND_MESSAGE", body });
 
 export default dialogsReducer;

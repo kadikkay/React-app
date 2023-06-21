@@ -39,7 +39,7 @@ const LoginForm = (props) => {
         <Field
           component={Input}
           name="password"
-          type="text"
+          type="password"
           placeholder="Pass"
           validate={[required]}
         />
@@ -63,3 +63,18 @@ const LoginRedaxForm = reduxForm({
 })(LoginForm);
 
 export default Login;
+
+// let array = [-1, 2, 3, 7, 10];
+// k = 9;
+
+// for (let i = 0; i < array.length; i++) {
+//   for (let j = 0; j < array.length; j++) {
+//     if ( array[i] + array[j] === k) {
+//       console.log(array[i])
+//       console.log(array[j])
+      
+//     }
+//     break
+//   }
+// }
+

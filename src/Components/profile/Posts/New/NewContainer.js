@@ -8,7 +8,6 @@ let mapStateToProps = (state) => {
   return {
     newPostText: state.profile.newPostText,
     postData: state.profile.postData,
-    store: state.profile
   };
 };
 

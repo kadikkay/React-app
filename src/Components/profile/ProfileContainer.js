@@ -1,5 +1,10 @@
 import React from "react";
-import { setProfile, getProfile, getStatus } from "../../redux/profileReducer";
+import {
+  setProfile,
+  getProfile,
+  getStatus,
+  updateStatus,
+} from "../../redux/profileReducer";
 import s from "./Profile.module.css";
 import Profile from "./Profile";
 import { connect } from "react-redux";
@@ -11,10 +16,13 @@ class ProfileContainer extends React.Component {
   componentDidMount() {
     let userId = this.props.router.params.userId;
     if (!userId) {
-      userId = 29199;
+      userId = this.props.userId;
+      if (!userId) {
+        this.props.history.push("/login");
+      }
     }
-
     this.props.getProfile(userId);
+    this.props.getStatus(userId);
   }
 
   render() {
@@ -25,7 +33,11 @@ class ProfileContainer extends React.Component {
           src="https://helpx.adobe.com/content/dam/help/en/photoshop/using/convert-color-image-black-white/jcr_content/main-pars/before_and_after/image-before/Landscape-Color.jpg"
           alt="#"
         /> */}
-        <Profile {...this.props} dataProfile={this.props.dataProfile} userId={this.props.router.params.userId}/>
+        <Profile
+          {...this.props}
+          dataProfile={this.props.dataProfile}
+          userId={this.props.router.params.userId}
+        />
       </div>
     );
   }
@@ -47,7 +59,8 @@ function withRouter(ProfileContainer) {
 let mapStateToProps = (state) => {
   return {
     dataProfile: state.profile.dataProfile,
-    status: state.profile.status
+    status: state.profile.status,
+    userId: state.auth.id,
   };
 };
 
@@ -56,6 +69,7 @@ export default compose(
     setProfile,
     getProfile,
     getStatus,
+    updateStatus,
   }),
   withRouter,
   withAuthRedirect

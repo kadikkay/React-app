@@ -34,7 +34,7 @@ const Users = (props) => {
             fullName={user.name}
             photo={user.photos}
             status={user.status}
-            key={user.id}
+            // key={user.id}
             id={user.id}
             city="Minsk"
             country="Belarus"

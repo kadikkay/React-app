@@ -1,4 +1,5 @@
 import { userAPI } from "../api/api";
+import {updateObjectInArray} from '../utils/helper/helper'
 
 let initialState = {
   users: [],
@@ -14,29 +15,13 @@ const usersReducer = (state = initialState, action) => {
     case "FOLLOW": {
       return {
         ...state,
-        users: state.users.map((u) => {
-          if (u.id === action.userID) {
-            return {
-              ...u,
-              followed: true,
-            };
-          }
-          return u;
-        }),
+        users: updateObjectInArray(state.users, action.userID, 'id', {followed: true})
       };
     }
     case "UNFOLLOW": {
       return {
         ...state,
-        users: state.users.map((u) => {
-          if (u.id === action.userID) {
-            return {
-              ...u,
-              followed: false,
-            };
-          }
-          return u;
-        }),
+        users: updateObjectInArray(state.users, action.userID, 'id', {followed: false})
       };
     }
     case "SET_USERS": {
@@ -100,39 +85,29 @@ export const followingChanged = (isFetching, userId) => ({
   userId,
 });
 
-export const getUsers = (currentPage, pageSize) => {
-  return (dispatch) => {
-    dispatch(fetchingChanged(true));
-    userAPI.getUsers(currentPage, pageSize).then((data) => {
-      dispatch(setUsers(data.items));
-      dispatch(setTotalUsersCount(data.totalCount));
-      dispatch(fetchingChanged(false));
-    });
-  };
+export const getUsers = (page, pageSize) => async (dispatch) => {
+  dispatch(fetchingChanged(true));
+  dispatch(setPage(page));
+  let response = await userAPI.getUsers(page, pageSize);
+  dispatch(setUsers(response.items));
+  dispatch(setTotalUsersCount(response.totalCount));
+  dispatch(fetchingChanged(false));
 };
-export const follow = (userID) => {
-  return (dispatch) => {
-    dispatch(followingChanged(true, userID));
-    userAPI.follow(userID)
-    .then((response) => {
-      if (response.data.resultCode === 0) {
-        dispatch(acceptFollow(userID));
-      }
-      dispatch(followingChanged(false, userID))
-    });
-  };
+export const follow = (userID) => async (dispatch) => {
+  dispatch(followingChanged(true, userID));
+  let response = await userAPI.follow(userID);
+  if (response.data.resultCode === 0) {
+    dispatch(acceptFollow(userID));
+  }
+  dispatch(followingChanged(false, userID));
 };
-export const unfollow = (userID) => {
-  return (dispatch) => {
-    dispatch(followingChanged(true, userID));
-    userAPI.unfollow(userID)
-    .then((response) => {
-      if (response.data.resultCode === 0) {
-        dispatch(acceptUnfollow(userID));
-      }
-      dispatch(followingChanged(false, userID))
-    });
-  };
+export const unfollow = (userID) => async (dispatch) => {
+  dispatch(followingChanged(true, userID));
+  let response = await userAPI.unfollow(userID);
+  if (response.data.resultCode === 0) {
+    dispatch(acceptUnfollow(userID));
+  }
+  dispatch(followingChanged(false, userID));
 };
 
 export default usersReducer;

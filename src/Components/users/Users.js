@@ -1,31 +1,12 @@
 import React from "react";
 import UserItem from "./User/UserItem";
 import s from "./Users.module.css";
+import Paginator from "../common/Paginator/Paginator";
 
-const Users = (props) => {
-  let pageCount = Math.ceil(props.totalCount / props.pageSize);
-  pageCount = 20;
-  let pages = [];
-  for (let i = 1; i <= pageCount; i++) {
-    pages.push(i);
-  }
-
+const Users = ({totalCount, pageSize, onPageChanged, currentPage, ...props}) => {
   return (
     <div className={s.item}>
-      <div>
-        {pages.map((p) => {
-          return (
-            <span
-              className={props.currentPage === p && s.selectedPage}
-              onClick={(e) => {
-                props.onPageChanged(p);
-              }}
-            >
-              {p}
-            </span>
-          );
-        })}
-      </div>
+      <Paginator totalCount={totalCount} pageSize={pageSize} onPageChanged={onPageChanged} currentPage={currentPage} />
       <div>
         {props.users.map((user) => (
           <UserItem
@@ -34,7 +15,7 @@ const Users = (props) => {
             fullName={user.name}
             photo={user.photos}
             status={user.status}
-            // key={user.id}
+            key={user.id}
             id={user.id}
             city="Minsk"
             country="Belarus"

@@ -1,6 +1,6 @@
-import { Field, reduxForm } from "redux-form";
+import { reduxForm } from "redux-form";
 import s from "./Login.module.css";
-import { Input } from "../common/FormsControl/Input";
+import { createField, Input } from "../common/FormsControl/Input";
 import { required } from "../../utils/validators/validators";
 import { Navigate } from "react-router-dom";
 
@@ -10,7 +10,7 @@ const Login = (props) => {
   };
 
   if (props.isAuth) {
-    return <Navigate to="/profile" />
+    return <Navigate to="/profile" />;
   }
 
   return (
@@ -21,37 +21,20 @@ const Login = (props) => {
   );
 };
 
-const LoginForm = (props) => {
+const LoginForm = ({ handleSubmit }) => {
   return (
-    <form className={s.form} onSubmit={props.handleSubmit}>
+    <form className={s.form} onSubmit={handleSubmit}>
       <div>
         <label>Login</label>
-        <Field
-          component={Input}
-          name="email"
-          type="text"
-          placeholder="login"
-          validate={[required]}
-        />
+        {createField(Input, "email", "text", "login", [required])}
       </div>
       <div>
         <label>Password</label>
-        <Field
-          component={Input}
-          name="password"
-          type="password"
-          placeholder="Pass"
-          validate={[required]}
-        />
+        {createField(Input, "password", "password", "Pass", [required])}
       </div>
       <div>
         <label>Remember me</label>
-        <Field
-          component={Input}
-          name="rememberMe"
-          type="checkbox"
-          validate={[required]}
-        />
+        {createField(Input, "rememberMe", "checkbox", null, [required])}
       </div>
       <button>Log in</button>
     </form>
@@ -63,18 +46,3 @@ const LoginRedaxForm = reduxForm({
 })(LoginForm);
 
 export default Login;
-
-// let array = [-1, 2, 3, 7, 10];
-// k = 9;
-
-// for (let i = 0; i < array.length; i++) {
-//   for (let j = 0; j < array.length; j++) {
-//     if ( array[i] + array[j] === k) {
-//       console.log(array[i])
-//       console.log(array[j])
-      
-//     }
-//     break
-//   }
-// }
-

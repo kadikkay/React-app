@@ -5,7 +5,7 @@ import News from "./Components/news/News";
 import Music from "./Components/music/Music";
 import Settings from "./Components/settings/Settings";
 import {
-  BrowserRouter,
+  HashRouter,
   Route,
   Routes,
   useLocation,
@@ -38,7 +38,7 @@ class App extends React.Component {
       return <Preloader />;
     } else {
       return (
-        <BrowserRouter>
+        <HashRouter>
           <div className="app__wrapper">
             <HeaderContainer />
             <Nav />
@@ -65,7 +65,7 @@ class App extends React.Component {
               </Suspense>
             </div>
           </div>
-        </BrowserRouter>
+        </HashRouter>
       );
     }
   }

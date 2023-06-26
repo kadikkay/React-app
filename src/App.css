@@ -49,13 +49,16 @@ button {
 
 .app__wrapper-content{
   grid-area: c;
-  background-color: #61dafb20;
+  background-color: #61dafb;
   display: grid;
+  color: #fff;
   grid-template-rows: 1fr;
   grid-template-columns: 1fr;
   grid-gap: 10px;
   grid-template-areas: "img";
   border-radius: 10px;
+  border-top-left-radius: 120px;
+  position: relative;
 }
 
 /* width */

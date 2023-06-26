@@ -1,5 +1,5 @@
 .item{
-  color: #b42d2d;
+  color: #3D8599;
   display: flex;
   align-items: flex-start;
   justify-content: start;
@@ -11,7 +11,7 @@
   border-radius: 40px;
   object-fit: cover;
   margin-right: 20px;
-  border: 2px solid gold;
+  border: 2px solid #CCFFEE;
 }
 
 .item.active{
@@ -21,14 +21,16 @@
 .item span{
   display: block;
   min-height: 50px;
-  background-color: #fff;
+  background-color: #CCFFEE;
   padding: 10px 20px;
   position: relative;
+  max-width: 395px;
+  border-radius: 10px;
 }
 
 .item span::before{
   content: '◀';
   position: absolute;
   left: -15px;
-  color: #fff;
+  color: #CCFFEE;
 }

@@ -1,6 +1,6 @@
 .header{
   grid-area: h;
-  background-color: antiquewhite;
+  background-color: #61dafb;
   display: flex;
   justify-content: start;
   align-items: center;
@@ -10,6 +10,6 @@
 }
 
 .login__block{
-  color: #b42d2d;
+  color: #fff;
 }
 

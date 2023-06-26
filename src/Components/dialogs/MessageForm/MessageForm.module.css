@@ -13,8 +13,6 @@
 }
 
 .dialogs{
-  /* display: grid;
-  grid-template-columns: 1fr; */
   grid-gap: 10px;
   padding: 20px 30px;
   background-color: #fff;
@@ -91,12 +89,11 @@
 }
 
 .text:focus + .btn{
-  border: 2px solid #b42d2d80;
-  color: #b42d2d;
+  color: #CCFFEE;
 }
 
 .text::-webkit-input-placeholder { /* WebKit browsers */
-  color: #e2cfcf ;
+  color: #CCFFEE ;
 }
 
 .new{
@@ -109,15 +106,15 @@
   top: 50%;
   transform: translateY(-58%) translateX(-10%);
   padding: 7px 17px;
-  background-color: #fff;
+  background-color: #3D8599;
   border-radius: 10px;
-  color: #e2cfcf;
+  color: #fff;
   transition: background-color .2s ease-in-out, color .2s ease-in-out;
-  border: 2px solid #ffd70020;
+  border: 2px solid #3D8599;
 }
 
 .btn:hover{
-  background-color: #b42d2d;
-  color: #fff !important;
-  border: 2px solid #b42d2d !important;
+  background-color: #fff !important;
+  color: #3D8599 !important;
+  border: 2px solid #3D8599 !important;
 }

@@ -1,6 +1,6 @@
 .nav{
   grid-area: n;
-  background-color: antiquewhite;
+  background-color: #61dafb;
   padding: 20px 10px;
   border-radius: 10px;
 }
@@ -21,9 +21,12 @@
 }
 
 li a{
-  color: #b42d2d;
+  color: #3D8599;
+  border-radius: 5px;
+  background-color: #fff;
 }
 
 li a.item{
-  color:  #e2cfcf;
+  color:  #fff;
+  background-color: #61dafb;
 }

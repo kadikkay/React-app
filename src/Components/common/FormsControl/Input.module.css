@@ -4,10 +4,14 @@
   font-size: 20px;
   resize: none;
   width: 100%;
+  border-radius: 10px;
+  border: 2px solid #3D8599;
+  color: #3D8599;
 }
 
 .text.error,
 .input.error{
-  border: 2px solid red;
+  border: 2px solid #E86C48;
+  color: #E86C48;
   border-radius: 10px;
 } 

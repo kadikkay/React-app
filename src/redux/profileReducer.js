@@ -38,6 +38,12 @@ const profileReducer = (state = initialState, action) => {
         status: action.status,
       };
     }
+    case "LOAD_IMAGE": {
+      return {
+        ...state,
+        dataProfile: {...state.dataProfile, photos: action.photos},
+      };
+    }
     default:
       return state;
   }
@@ -51,6 +57,7 @@ export const setProfile = (dataProfile) => ({
   type: "SET_PROFILE",
   dataProfile,
 });
+export const loadImage = (photos) => ({ type: "LOAD_IMAGE", photos });
 
 export const setStatus = (status) => ({ type: "SET_STATUS", status });
 
@@ -60,16 +67,23 @@ export const getProfile = (userId) => async (dispatch) => {
 };
 
 export const getStatus = (userId) => async (dispatch) => {
-    let response = await profileAPI.getStatus(userId)
-      dispatch(setStatus(response));
-
-  };
+  let response = await profileAPI.getStatus(userId);
+  dispatch(setStatus(response));
+};
 
 export const updateStatus = (status) => async (dispatch) => {
-    let response = await profileAPI.updateStatus(status)
-      if (response.data.resultCode === 0) {
-        dispatch(setStatus(status));
-      }
+  let response = await profileAPI.updateStatus(status);
+  if (response.data.resultCode === 0) {
+    dispatch(setStatus(status));
+  }
+};
+
+export const savePhoto = (photos) => async (dispatch) => {
+  debugger
+  let response = await profileAPI.loadImage(photos);
+  if (response.data.resultCode === 0) {
+    dispatch(loadImage(response.data.data.photos));
+  }
 };
 
 export default profileReducer;
